@@ -1,0 +1,19 @@
+.main-page
+  br
+  .center-align
+    h1 = t('questionnaire')
+  br
+  .center-align
+    h3 = t('questionnaire_info')
+  br
+  .center-align
+    = link_to t('member.create'), new_member_path, class: 'waves-effect waves-light btn-large'
+  br
+  br
+  .row
+    .col.s4.center
+      = image_tag 'TDN.png', width: '220px'
+    .col.s4.center
+      = image_tag 'BASF.jpg', width: '250px'
+    .col.s4.center
+      = image_tag 'euralis.jpg', width: '250px'

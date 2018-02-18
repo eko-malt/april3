@@ -1,0 +1,18 @@
+.row
+  .col.s12
+    = simple_form_for @member do |f|
+      .row
+        .col.s3 = f.input :first_name, label: t('member.first_name')
+        .col.s3 = f.input :second_name, label: t('member.second_name')
+        .col.s2 = f.input :phone, label: t('member.phone'), input_html: { type: :text }
+        .col.s4 = f.input :email, label: t('member.email')
+      .row
+        .col.s3 = f.input :company, label: t('member.company')
+        .col.s3 = f.input :position, label: t('member.position')
+        .col.s2 = f.input :edrpou, label: t('member.edrpou'), input_html: { type: :text }
+        .col.s4 = f.input :manager, label: t('member.manager')
+      .row
+        .col.s8 = f.input :address, label: false  , input_html: { id: 'autocomplete' }
+        .col.s4 = f.input :area, label: t('member.area'), input_html: { type: :text }
+      .center
+        = f.submit t('form.save'), class: 'waves-effect waves-light btn-large'
