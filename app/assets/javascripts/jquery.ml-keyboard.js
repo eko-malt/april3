@@ -309,7 +309,6 @@ Keyboard.prototype.showKeyboard = function($input) {
     $('#mlkeyboard ul li')[0].style.display = 'none';
     $('#mlkeyboard ul li')[27].style.display = 'none';
 
-    $('div').last().addClass('mlkeyboard_eng');
     $('.mlkeyboard_eng ul li')[0].style.display = 'none';
     $('.mlkeyboard_eng ul li')[27].style.display = 'none';
 

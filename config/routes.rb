@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
+  root to: 'doctors#new'
   get '/list', to: 'pages#list'
   get '/xls', to: 'pages#results'
   get '/test', to: 'pages#test'

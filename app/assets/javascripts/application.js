@@ -7,6 +7,7 @@
 
 var ready;
 ready = function() {
+    var number2dial;
     Materialize.updateTextFields();
     $('select').material_select();
     $('.ml_ukr').mlKeyboard({
@@ -19,16 +20,36 @@ ready = function() {
         window.print();
     });
     //$('#doctor_first_name').focus();
-    /*$('#autocomplete').focus(function() {
+    $('#doctor_city').focus(function() {
         geolocate();
-    });*/
+    });
+    $('input').focus(function() {
+       if ((this.id != 'doctor_phone') && (this.id != 'doctor_phone')) {
+           $('#numpad').addClass('disabled');
+       }
+    });
+    $('.dialpad').focus(function() {
+        $('#numpad').removeClass('disabled');
+        console.log(this);
+        number2dial = this;
+        if (number2dial.value == '') {
+            if (number2dial.id == 'doctor_phone') {
+                number2dial.value = '+380'
+            }
+            if (number2dial.id == 'doctor_console') {
+                number2dial.value = ' '
+            }
+        }
+    });
+    $('label[for=doctor_city]').removeClass('active');
+    $('div').last().addClass('mlkeyboard_eng');
+
     create_and_show_numpad();
 
     function create_and_show_numpad() {
         const numbers = "123456789";
         const buttonClass = 'numpad';
         const buttonBackspace = 'backspace';
-        const number2dial = document.getElementById('number2dial');
 
         var buttonContainer = document.createElement('div');
         buttonContainer.classList.add('numpad-container');
@@ -42,7 +63,7 @@ ready = function() {
 
         function addBackspace() {
             var button = document.createElement('button');
-            button.innerHTML = "Del";
+            button.innerHTML = "&larr;";
             button.classList.add("backspace");
             buttonContainer.appendChild(button);
         }
@@ -54,29 +75,11 @@ ready = function() {
 
 
         $('.backspace').click(function (e) {
-            if (e.target.classList.contains(buttonBackspace)) {
-                number2dial.innerHTML = number2dial.innerHTML.slice(0, -1);
-            }
-            if ($('#number2dial').text().length == 13) {
-                $('#download').attr('disabled', false).removeClass('transparent-button')
-            } else {
-                $('#download').attr('disabled', true).addClass('transparent-button');
-            }
+            number2dial.value = number2dial.value.slice(0, -1);
         });
 
         $('.numpad').click(function (e) {
-            if (e.target.classList.contains(buttonClass)) {
-                number2dial.innerHTML += e.target.innerHTML;
-            }
-            if (e.target.classList.contains(buttonBackspace)) {
-                number2dial.innerHTML = number2dial.innerHTML.slice(0, -1);
-            }
-            $('#download-photo').attr('download', num + "_" + $('#number2dial').text());
-            if ($('#number2dial').text().length == 13) {
-                $('#download').attr('disabled', false).removeClass('transparent-button')
-            } else {
-                $('#download').attr('disabled', true).addClass('transparent-button');
-            }
+            number2dial.value += e.target.innerHTML;
         });
     }
 }
@@ -104,7 +107,7 @@ function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+        /** @type {!HTMLInputElement} */(document.getElementById('doctor_city')),
         {types: ['geocode']});
 
     // When the user selects an address from the dropdown, populate the address
