@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/xls', to: 'pages#results'
   get '/test', to: 'pages#test'
   resources :members
+  resources :doctors
 end

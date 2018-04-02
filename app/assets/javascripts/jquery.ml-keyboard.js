@@ -273,7 +273,7 @@ Keyboard.prototype.setUpFor = function($input) {
 
   if (this.options.hide_on_blur) {
     $input.bind('blur', function() {
-      var VERIFY_STATE_DELAY = 500;
+      var VERIFY_STATE_DELAY = 300;
 
       // Input focus changes each time when user click on keyboard key
       // To prevent momentary keyboard collapse input state verifies with timers help
@@ -292,8 +292,9 @@ Keyboard.prototype.setUpFor = function($input) {
     $trigger.bind('click', function(e) {
       e.preventDefault();
 
-      if (_this.isVisible) { _this.hideKeyboard(); }
-      else {
+      if (_this.isVisible) {
+          _this.hideKeyboard();
+      } else {
         _this.showKeyboard($input);
         $input.focus();
       }
@@ -305,9 +306,12 @@ Keyboard.prototype.showKeyboard = function($input) {
   var input_changed = !this.$current_input || $input[0] !== this.$current_input[0];
 
     $('.main').addClass('body-container');
-    $('#mlkeyboard ul li')[0].style.display = 'none'
-    $('#mlkeyboard ul li')[27].style.display = 'none'
+    $('#mlkeyboard ul li')[0].style.display = 'none';
+    $('#mlkeyboard ul li')[27].style.display = 'none';
 
+    $('div').last().addClass('mlkeyboard_eng');
+    $('.mlkeyboard_eng ul li')[0].style.display = 'none';
+    $('.mlkeyboard_eng ul li')[27].style.display = 'none';
 
     if (!this.keep_focus || input_changed) {
     if (input_changed) this.keep_focus = true;
@@ -448,7 +452,7 @@ Keyboard.prototype.changeKeysState = function() {
 var mlKeyboard = mlKeyboard || {layouts: {}};
 
 mlKeyboard.layouts.en_US = [
-  {d: '`', u: '~'},
+  {},
   {d: '1',u: '!'},
   {d: '2',u: '@'},
   {d: '3',u: '#'},
@@ -475,7 +479,7 @@ mlKeyboard.layouts.en_US = [
   {d: 'p',u: 'P'},
   {d: ']',u: '}'},
   {d: '[',u: '{'},
-  {d: '\\',u: '|'},
+  {},
   {}, // Caps lock
   {d: 'a',u: 'A'},
   {d: 's',u: 'S'},

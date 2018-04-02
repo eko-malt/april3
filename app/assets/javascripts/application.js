@@ -8,22 +8,80 @@
 var ready;
 ready = function() {
     Materialize.updateTextFields();
-    $('input').mlKeyboard({
+    $('select').material_select();
+    $('.ml_ukr').mlKeyboard({
         layout: 'ua_UK'
     });
-    $('#print_button').click(function() {
+    $('.ml_eng').mlKeyboard({
+        layout: 'en_US'
+    });
+    $('#print_button').click(function () {
         window.print();
     });
-    Materialize.updateTextFields();
-    $('#member_first_name').focus();
-
-    $('#autocomplete').focus(function() {
+    //$('#doctor_first_name').focus();
+    /*$('#autocomplete').focus(function() {
         geolocate();
-    });
-};
+    });*/
+    create_and_show_numpad();
+
+    function create_and_show_numpad() {
+        const numbers = "123456789";
+        const buttonClass = 'numpad';
+        const buttonBackspace = 'backspace';
+        const number2dial = document.getElementById('number2dial');
+
+        var buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('numpad-container');
+
+        function addButton(number) {
+            var button = document.createElement('button');
+            button.innerHTML = number;
+            button.classList.add(buttonClass);
+            buttonContainer.appendChild(button);
+        }
+
+        function addBackspace() {
+            var button = document.createElement('button');
+            button.innerHTML = "Del";
+            button.classList.add("backspace");
+            buttonContainer.appendChild(button);
+        }
+
+        numbers.split('').forEach(addButton);
+        addBackspace();
+        addButton('0');
+        document.querySelector('.numpad_target').appendChild(buttonContainer);
+
+
+        $('.backspace').click(function (e) {
+            if (e.target.classList.contains(buttonBackspace)) {
+                number2dial.innerHTML = number2dial.innerHTML.slice(0, -1);
+            }
+            if ($('#number2dial').text().length == 13) {
+                $('#download').attr('disabled', false).removeClass('transparent-button')
+            } else {
+                $('#download').attr('disabled', true).addClass('transparent-button');
+            }
+        });
+
+        $('.numpad').click(function (e) {
+            if (e.target.classList.contains(buttonClass)) {
+                number2dial.innerHTML += e.target.innerHTML;
+            }
+            if (e.target.classList.contains(buttonBackspace)) {
+                number2dial.innerHTML = number2dial.innerHTML.slice(0, -1);
+            }
+            $('#download-photo').attr('download', num + "_" + $('#number2dial').text());
+            if ($('#number2dial').text().length == 13) {
+                $('#download').attr('disabled', false).removeClass('transparent-button')
+            } else {
+                $('#download').attr('disabled', true).addClass('transparent-button');
+            }
+        });
+    }
+}
 
 $(document).on('turbolinks:load', ready);
-
 
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.

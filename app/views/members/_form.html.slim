@@ -2,10 +2,10 @@
   .col.s12
     = simple_form_for @member do |f|
       .row
-        .col.s3 = f.input :first_name, label: t('member.first_name')
-        .col.s3 = f.input :second_name, label: t('member.second_name')
-        .col.s2 = f.input :phone, label: t('member.phone'), input_html: { type: :text }
-        .col.s4 = f.input :email, label: t('member.email')
+        .col.s4 = f.input :first_name, label: t('member.first_name')
+        .col.s4 = f.input :second_name, label: t('member.second_name')
+        .col.s4 = f.input :phone, label: t('member.phone'), input_html: { type: :text }
+        //.col.s4 = f.input :email, label: t('member.email')
       .row
         .col.s3 = f.input :company, label: t('member.company')
         .col.s3 = f.input :position, label: t('member.position')
