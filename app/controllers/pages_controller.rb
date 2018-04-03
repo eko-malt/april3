@@ -2,14 +2,14 @@ class PagesController < ApplicationController
   def index; end
 
   def list
-    @members = Member.all
+    @doctors = Doctor.all
   end
 
   def test
-    @member = Member.first ||= Member.new
+    @member = Doctor.first ||= Doctor.new
   end
 
   def results
-    @members = Member.all
+    @doctors = Doctor.all
   end
 end

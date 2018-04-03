@@ -1,0 +1,14 @@
+tr id="doctor_#{doctor.id}"
+  td = doctor.id
+  td = "#{doctor.first_name} #{doctor.second_name} "
+  td = doctor.city
+  td = doctor.spec
+  td = doctor.phone
+  td = doctor.email
+  td
+    = link_to edit_doctor_path(doctor.id)
+      i.material-icons edit
+    = link_to doctor_path(doctor.id), method: :delete, data: {confirm: t('form.confirm_delete')}
+      i.material-icons delete
+    = link_to doctor_path(doctor.id)
+      i.material-icons receipt
